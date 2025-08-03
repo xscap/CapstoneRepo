@@ -1,0 +1,112 @@
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 191, 99, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 191, 99, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 191, 99, 0);
+  }
+}
+
+.popup {
+  --burger-bg: #00bf63;
+  --burger-color: #333;
+  --burger-diameter: 3.125em;
+  --burger-transition: all 0.1s ease-in-out;
+  --nav-bg: #fff;
+  --nav-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --nav-button-hover-bg: #00bf63;
+  --nav-button-hover-text-color: #fff;
+
+  position: relative;
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  background: url('https://www.transparenttextures.com/patterns/white-paper.png');
+}
+
+.popup input {
+  display: none;
+}
+
+.burger {
+  width: var(--burger-diameter);
+  height: var(--burger-diameter);
+  background-color: var(--burger-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: pulse 2s infinite;
+  transition: transform 0.2s;
+}
+
+.burger:hover {
+  transform: scale(1.1);
+}
+
+.burger:active {
+  transform: scale(0.95);
+}
+
+.popup-window {
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.85);
+  background: var(--nav-bg) url('https://www.transparenttextures.com/patterns/cubes.png');
+  background-size: cover;
+  border: 1px solid #ccc;
+  box-shadow: var(--nav-shadow);
+  border-radius: 10px;
+  position: absolute;
+  top: calc(var(--burger-diameter) + 10px);
+  left: 0;
+  z-index: 10;
+  transition: 0.2s ease;
+  padding: 1em;
+  min-width: 200px;
+}
+
+.popup input:checked ~ .popup-window {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.popup-window legend {
+  font-size: 0.8rem;
+  color: #777;
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+}
+
+.popup-window ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.popup-window li {
+  margin: 0.3em 0;
+}
+
+.popup-window button {
+  background: none;
+  border: none;
+  color: var(--burger-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  width: 100%;
+  padding: 0.5em 0.75em;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.popup-window button:hover {
+  background-color: var(--nav-button-hover-bg);
+  color: var(--nav-button-hover-text-color);
+}
