@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import "./Sidebar.css";
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./sidebar.css";
 import { FaHome, FaFileInvoice, FaDollarSign, FaUsers, FaChartBar } from "react-icons/fa";
 
 const Sidebar = () => {
-  const [active, setActive] = useState("Customers");
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const menuItems = [
-    { name: "Dashboard", icon: <FaHome /> },
-    { name: "Invoices", icon: <FaFileInvoice /> },
-    { name: "Payments", icon: <FaDollarSign /> },
-    { name: "Customers", icon: <FaUsers /> },
-    { name: "Reports", icon: <FaChartBar /> },
+    { name: "Dashboard", icon: <FaHome />, path: "/" },
+    { name: "Invoices", icon: <FaFileInvoice />, path: "/invoices" },
+    { name: "Payments", icon: <FaDollarSign />, path: "/payments" },
+    { name: "Customers", icon: <FaUsers />, path: "/customers" },
+    { name: "Reports", icon: <FaChartBar />, path: "/reports" },
   ];
 
   return (
@@ -20,8 +22,8 @@ const Sidebar = () => {
         {menuItems.map((item) => (
           <li
             key={item.name}
-            className={`sidebar-item ${active === item.name ? "active" : ""}`}
-            onClick={() => setActive(item.name)}
+            className={`sidebar-item${location.pathname === item.path ? " active" : ""}`}
+            onClick={() => navigate(item.path)}
           >
             <span className="icon">{item.icon}</span>
             <span className="text">{item.name}</span>
